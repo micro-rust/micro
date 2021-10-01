@@ -4,13 +4,13 @@
 /// No OP instruction.
 #[inline(always)]
 pub fn nop() {
-	unsafe { asm!("nop") }
+    unsafe { asm!("nop") }
 }
 
 /// Yield instruction.
 #[inline(always)]
 pub fn r#yield() {
-	unsafe { asm!("yield") }
+    unsafe { asm!("yield") }
 }
 
 
@@ -18,5 +18,5 @@ pub fn r#yield() {
 #[cfg(not(target_arch="thumbv6"))]
 #[inline(always)]
 pub fn dbg() {
-	unsafe { asm!("dbg") }
+    unsafe { asm!("dbg") }
 }
