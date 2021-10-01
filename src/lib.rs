@@ -5,9 +5,12 @@
 #![deny(warnings)]
 
 #![feature(asm)]
+#![feature(const_fn_trait_bound)]
 
 pub mod freq;
 pub mod reg;
+
+mod per;
 
 #[cfg(feature = "arm")]
 mod arm;
@@ -19,3 +22,6 @@ pub use self::arm::*;
 
 pub use self::reg::Register;
 pub use self::reg::XType;
+
+
+pub use self::per::{ Peripheral, Single };
