@@ -10,6 +10,8 @@
 pub mod freq;
 pub mod reg;
 
+pub mod drivers;
+
 mod per;
 
 #[cfg(feature = "arm")]

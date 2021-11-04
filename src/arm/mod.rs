@@ -3,4 +3,5 @@
 
 
 pub mod asm;
+pub mod int;
 pub mod scb;

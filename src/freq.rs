@@ -64,6 +64,8 @@ impl core::convert::Into<u32> for FrequencyS {
 
 
 /// Experimental implementation of Frequency asbtraction.
+/// Implemented with a 32 bit architecture in mind. 16 bit architectures
+/// should work, 8 bit architectures do not cover the whole frequency spectrum.
 pub struct FrequencyX<const M: usize>(usize);
 
 
