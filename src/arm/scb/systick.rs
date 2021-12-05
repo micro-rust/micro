@@ -19,7 +19,7 @@ impl<R: Register<u32>> Systick<R> {
 
     /// Sets the clock source as the external clock.
     #[inline(always)]
-    pub fn external() {
+    pub fn external(&mut self) {
         let mut systick: Peripheral<u32, R, 4, 0xE000E010> = Peripheral::get();
 
         systick[0].clear(1 << 2)
