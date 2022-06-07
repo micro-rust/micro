@@ -7,13 +7,17 @@
 #![feature(asm)]
 #![feature(asm_const)]
 #![feature(const_fn_trait_bound)]
+#![feature(const_trait_impl)]
 
-pub mod freq;
+/// Abstraction for Hardware Registers.
 pub mod reg;
 
+/// Common traits for system resources.
+pub mod res;
+
+/// Drivers for different peripherals (internal and external).
 pub mod drivers;
 
-mod per;
 
 #[cfg(feature = "arm")]
 mod arm;
@@ -21,10 +25,3 @@ mod arm;
 
 #[cfg(feature = "arm")]
 pub use self::arm::*;
-
-
-pub use self::reg::Register;
-pub use self::reg::XType;
-
-
-pub use self::per::{ Peripheral, Single };
