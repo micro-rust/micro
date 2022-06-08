@@ -5,7 +5,7 @@
 #[macro_export]
 macro_rules! preallocate {
     ($alloc:ty) => {{
-        fn resolve() -> &mut $alloc {
+        fn resolve<'a>() -> &'a mut $alloc {
             #[link_section = ".uninit.PREALLOCATE"]
             #[used]
             pub static mut PREALLOCATION: $alloc = unsafe { core::mem::MaybeUninit::uninit().assume_init() };
