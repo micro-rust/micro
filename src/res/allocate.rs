@@ -2,7 +2,7 @@
 //! Creates a static allocation of data.
 
 
-
+#[macro_export]
 macro_rules! preallocate {
     ($alloc:ty) => {{
         #[link_section = ".uninit.PREALLOCATE"]
@@ -13,7 +13,7 @@ macro_rules! preallocate {
     }};
 }
 
-
+#[macro_export]
 macro_rules! reserve {
     ($alloc:ty) => { preallocate!($alloc) };
 }
