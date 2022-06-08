@@ -2,9 +2,7 @@
 
 
 mod acquire;
-
-#[macro_use]
-mod allocate;
+pub mod allocate;
 
 
 pub use self::acquire::{ Acquire, Release };
