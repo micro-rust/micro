@@ -2,6 +2,10 @@
 
 
 
+use core::arch::asm;
+
+
+
 /// Wait for Interrupt instruction.
 #[inline(always)]
 pub fn wfi() {

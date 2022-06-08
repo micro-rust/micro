@@ -1,6 +1,11 @@
 //! Miscellaneous ARM assembly instructions.
 
 
+
+use core::arch::asm;
+
+
+
 /// No OP instruction.
 #[inline(always)]
 pub fn nop() {
