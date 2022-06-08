@@ -8,9 +8,9 @@ macro_rules! preallocate {
         fn resolve<'a>() -> &'a mut $alloc {
             #[link_section = ".uninit.PREALLOCATE"]
             #[used]
-            pub static mut PREALLOCATION: $alloc = unsafe { core::mem::MaybeUninit::uninit().assume_init() };
+            pub static mut PREALLOCATION: [u8; core::mem::size_of::<$alloc>()] = [0u8; core::mem::size_of::<$alloc>()];
 
-            unsafe { &mut PREALLOCATION }
+            unsafe { &mut *(&mut PREALLOCATION as *mut _ as *mut $alloc) }
         }
 
         resolve()
