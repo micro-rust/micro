@@ -3,7 +3,7 @@
 
 
 pub mod asm;
-pub mod int;
+pub mod irq;
 //pub mod scb;
 
 /// Core ARM peripherals.

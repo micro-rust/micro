@@ -121,6 +121,11 @@ pub struct ExceptionControl {
 }
 
 impl ExceptionControl {
+    /// Force the creation of a `ExceptionControl` at the given address.
+    pub fn at<'a>(address: u32) -> &'a mut ExceptionControl {
+        unsafe { &mut *(address as *mut Self) }
+    }
+
     /// Reads the VTOR and returns a reference to the ExceptionControl.
     pub fn get<'a>() -> &'a mut ExceptionControl {
         // Read VTOR.
