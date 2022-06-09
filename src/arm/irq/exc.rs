@@ -142,15 +142,16 @@ impl ExceptionControl {
         if (address & !0x3F) != address { return None }
 
         // Get the source and destination pointers.
-        let src: *const u32 = self as *mut Self as *mut u32 as *const u32;
-        let dest: *mut u32 = address as *mut u32;
+        let base: u32 = self as *mut Self as u32;
+        let dest: u32 = address;
 
         // Relocate the vector.
-        for _ in 0..16 {
+        for i in 0..16 {
             unsafe {
-                core::ptr::write_volatile( dest, core::ptr::read_volatile( src ) );
-                let src = src.offset(1);
-                let dest = dest.offset(1);
+                core::ptr::write_volatile(
+                    (dest + (4 * i)) as *mut u32,
+                    core::ptr::read_volatile( (base + (4 * i)) as *const u32 )
+                );
             }
         }
 
