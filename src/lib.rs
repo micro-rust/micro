@@ -4,9 +4,7 @@
 
 #![deny(warnings)]
 
-#![feature(asm)]
 #![feature(asm_const)]
-#![feature(const_fn_trait_bound)]
 #![feature(const_trait_impl)]
 
 

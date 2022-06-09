@@ -17,7 +17,7 @@ pub struct UserHandler {
 impl UserHandler {
     /// Static intializer.
     pub const fn empty() -> UserHandler {
-        unsafe { UserHandler { handler: 0 as *mut (), context: None, init: false } }
+        UserHandler { handler: 0 as *mut (), context: None, init: false }
     }
 
     /// Calls the given handler function if it is initialized.
@@ -46,7 +46,7 @@ impl UserHandler {
     /// Sets the handler of the `UserContext`.
     pub fn isolated(&mut self, handler: fn()) {
         // Set the handler pointer.
-        self.handler = handler as *const _ as *const ();
+        self.handler = handler as *const ();
 
         // Set no context.
         self.context = None;
