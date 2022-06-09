@@ -5,6 +5,7 @@
 #![deny(warnings)]
 
 #![feature(asm_const)]
+#![feature(const_mut_refs)]
 #![feature(const_trait_impl)]
 
 
