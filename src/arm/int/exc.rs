@@ -2,7 +2,7 @@
 
 
 
-use super::asm::*;
+use super::super::asm::*;
 
 
 
@@ -257,6 +257,49 @@ impl ExceptionControl {
         cpsie_i();
     }
 }
+
+
+
+/// Exceptions of the Cortex-M architectures.
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+pub enum Exception {
+    /// Non Maskable Interrupt.
+    NMI,
+
+    /// Hard Fault.
+    HardFault,
+
+    /// Supervisor Call.
+    SVCall,
+
+    /// Pend Supervisor Call.
+    PendSV,
+
+    /// System tick.
+    Systick,
+
+    #[cfg(any(armv7m, armv8m_main))]
+    /// Memory management.
+    MemManage,
+
+    #[cfg(any(armv7m, armv8m_main))]
+    /// Bus Fault.
+    BusFault,
+
+    #[cfg(any(armv7m, armv8m_main))]
+    /// Usage Fault.
+    UsageFault,
+
+    #[cfg(any(armv7m, armv8m_main))]
+    /// Debug Monitor.
+    DebugMonitor,
+
+    #[cfg(armv8m_main)]
+    /// Secure Fault.
+    SecureFault,
+}
+
+
 
 fn default() {
     return;
