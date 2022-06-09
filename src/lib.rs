@@ -9,6 +9,11 @@
 #![feature(const_fn_trait_bound)]
 #![feature(const_trait_impl)]
 
+
+
+/// Interrupt utilities.
+pub mod int;
+
 /// Abstraction for Hardware Registers.
 pub mod reg;
 
