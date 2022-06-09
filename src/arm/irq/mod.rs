@@ -8,6 +8,6 @@ mod irq;
 
 
 
-pub use self::ctx::{ Context, IRQConfig };
-pub use self::exc::ExceptionControl;
+pub use self::ctx::{Context, IRQConfig};
+pub use self::exc::{Exception, ExceptionControl};
 pub use self::irq::IRQTable;
