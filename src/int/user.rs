@@ -44,26 +44,30 @@ impl UserHandler {
     }
 
     /// Sets the handler of the `UserContext`.
-    pub fn isolated(&mut self, handler: fn()) {
+    pub const fn isolated(handler: fn()) -> Self {
         // Set the handler pointer.
-        self.handler = handler as *const ();
+        handler = handler as *const ();
 
         // Set no context.
-        self.context = None;
+        context = None;
 
         // Indicate as initialized.
-        self.init = true;
+        init = true;
+
+        UserHandler { handler, context, init }
     }
 
     /// Initializes a `UserHandler` to the given 
-    pub fn contextualized<T: Sized>(&mut self, handler: fn(&mut T), context: &'static mut T, init: bool) {
+    pub const fn contextualized<T: Sized>(handler: fn(&mut T), context: &'static mut T, init: bool) -> Self {
         // Set the handler pointer.
-        self.handler = handler as *const ();
+        handler = handler as *const ();
 
         // Set the context.
-        self.context = Some( context as *mut T as *mut () );
+        context = Some( context as *mut T as *mut () );
 
         // inherit initialization.
-        self.init = init;
+        init = init;
+
+        UserHandler { handler, context, init }
     }
 }
