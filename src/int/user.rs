@@ -29,7 +29,7 @@ impl UserHandler {
                     let cxref: &mut () = unsafe { &mut *(cx) };
 
                     // Empty reference to the function.
-                    let fnref: fn(&mut ()) = unsafe { core::mem::transmute::<*const (), fn()>(self.handler) };
+                    let fnref: fn(&mut ()) = unsafe { core::mem::transmute::<*const (), fn(&mut ())>(self.handler) };
 
                     fnref( cxref );
                 },
@@ -58,7 +58,7 @@ impl UserHandler {
     /// Initializes a `UserHandler` to the given 
     pub fn contextualized<T: Sized>(&mut self, handler: fn(&mut T), context: &'static mut T, init: bool) {
         // Set the handler pointer.
-        self.handler = handler as *const _ as *const ();
+        self.handler = handler as *const ();
 
         // Set the context.
         self.context = Some( context as *mut T as *mut () );

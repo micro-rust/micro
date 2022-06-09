@@ -162,6 +162,8 @@ impl ExceptionControl {
 
         // Restore interrupts.
         cpsie_i();
+
+        unsafe { Some( &mut *(address as *mut Self) ) }
     }
 
     /// Sets the given Exception handler.
@@ -243,7 +245,7 @@ impl ExceptionControl {
         r &= !(0xFF << o);
 
         // Set the new priority.
-        r |= prio << o;
+        r |= (prio as u32) << o;
 
         // Write back the SHPR register.
         unsafe { core::ptr::write_volatile( (0xED000ED14 + r) as *mut u32, r ) };

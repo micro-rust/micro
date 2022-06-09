@@ -9,5 +9,5 @@ mod irq;
 
 
 pub use self::ctx::{ Context, IRQConfig };
-pub use self::exc::EXCTable;
+pub use self::exc::ExceptionControl;
 pub use self::irq::IRQTable;
