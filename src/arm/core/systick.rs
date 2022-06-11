@@ -13,80 +13,59 @@ pub trait Systick {
     /// Enables the Systick.
     #[inline(always)]
     fn enable(&mut self) {
-        // Reference to the SYST Control and Status Register (CSR).
-        let csr = DefaultRegister::at(0xE000E010);
-
-        // Set the ENABLE bit.
-        csr.set(1u32);
+        // Set the Interrupt Enable bit in Control and Status Register (CSR).
+        DefaultRegister::at(0xE000E010).set(1u32);
     }
 
     /// Disable the Systick.
     #[inline(always)]
     fn disable(&mut self) {
-        // Reference to the SYST Control and Status Register (CSR).
-        let csr = DefaultRegister::at(0xE000E010);
-
-        // Set the ENABLE bit.
-        csr.clear(1u32);
+        // Clear the Enable bit in Control and Status Register (CSR).
+        DefaultRegister::at(0xE000E010).clear(1u32);
     }
 
     /// Enables the Systick Exception generation.
     #[inline(always)]
     fn intenable(&mut self) {
-        // Reference to the SYST Control and Status Register (CSR).
-        let csr = DefaultRegister::at(0xE000E010);
-
-        // Set the ENABLE bit.
-        csr.set(1u32 << 1);
+        // Set the Interrupt Enable bit in Control and Status Register (CSR).
+        DefaultRegister::at(0xE000E010).set(1u32 << 1);
     }
 
     /// Disable the Systick Exception generation.
     #[inline(always)]
     fn intdisable(&mut self) {
-        // Reference to the SYST Control and Status Register (CSR).
-        let csr = DefaultRegister::at(0xE000E010);
-
-        // Set the ENABLE bit.
-        csr.clear(1u32 << 1);
+        // Clear the Interrupt Enable bit in Control and Status Register (CSR).
+        DefaultRegister::at(0xE000E010).clear(1u32 << 1);
     }
 
     /// Selects external clock as the clock source.
     #[inline(always)]
     fn external(&mut self) {
-        // Reference to the SYST Control and Status Register (CSR).
-        let csr = DefaultRegister::at(0xE000E010);
-
-        // Set the ENABLE bit.
-        csr.clear(1u32 << 2);
+        // Clear the Clock Source bit in the Control and Status Register (CSR).
+        DefaultRegister::at(0xE000E010).set(1u32 << 2);
     }
 
     /// Selects processor clock as the clock source.
     #[inline(always)]
     fn processor(&mut self) {
-        // Reference to the SYST Control and Status Register (CSR).
-        let csr = DefaultRegister::at(0xE000E010);
-
-        // Set the ENABLE bit.
-        csr.set(1u32 << 2);
+        // Set the Clock Source bit in the Control and Status Register (CSR).
+        DefaultRegister::at(0xE000E010).set(1u32 << 2);
     }
 
     /// Sets the next value to be reloaded into the counter.
     #[inline(always)]
     fn reload(&mut self, v: u32) {
-        // Reference to the SYST Reload Value Register (RVR).
-        let rvr = DefaultRegister::at(0xE000E014);
+        // Set the Reload Value Register.
+        DefaultRegister::at(0xE000E014).write(v);
 
-        // Write the reload value.
-        rvr.write(v);
+        // Set the Current Value Register.
+        DefaultRegister::at(0xE000E018).write(v);
     }
 
     /// Reads the current counter value.
     #[inline(always)]
     fn current(&mut self) -> u32 {
-        // Reference to the SYST Current Value Register (CVR).
-        let cvr = DefaultRegister::at(0xE000E018);
-
-        // Read the counter value.
-        cvr.read()
+        // Read the Current Value Register.
+        DefaultRegister::at(0xE000E018).read()
     }
 }
