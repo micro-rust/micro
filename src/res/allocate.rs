@@ -5,7 +5,7 @@
 #[macro_export]
 macro_rules! preallocate {
     ($alloc:ty) => {{
-        fn resolve<'a>() -> &'a mut PreAllocation<$alloc> {
+        fn resolve<'a>() -> &'a mut micro::res::allocate::PreAllocation<$alloc> {
             #[link_section = ".bss.PREALLOCATE"]
             #[used]
             pub static mut PREALLOCATION: micro::res::allocate::PreAllocation<$alloc> = micro::res::allocate::PreAllocation::empty();
