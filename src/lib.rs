@@ -10,6 +10,9 @@
 
 
 
+/// Buffer utilities.
+//pub mod buffer;
+
 /// Interrupt utilities.
 pub mod int;
 
