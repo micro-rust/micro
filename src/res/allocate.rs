@@ -36,7 +36,7 @@ pub struct PreAllocation<T: Sized> {
 
 impl<T: Sized> PreAllocation<T> {
     /// Static initializer.
-    pub fn empty() -> Self {
+    pub const fn empty() -> Self {
         Self {
             inner: unsafe { core::mem::MaybeUninit::uninit().assume_init() },
             init: 0,
