@@ -8,7 +8,7 @@ macro_rules! preallocate {
         fn resolve() -> &'a mut PreAllocation<$alloc> {
             #[link_section = ".bss.PREALLOCATE"]
             #[used]
-            pub static mut PREALLOCATION: PreAllocation<$alloc> = PreAllocation::empty();
+            pub static mut PREALLOCATION: micro::res::allocate::PreAllocation<$alloc> = micro::res::allocate::PreAllocation::empty();
 
             unsafe { &mut PREALLOCATION }
         }
