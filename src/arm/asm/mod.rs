@@ -12,7 +12,7 @@ pub use self::sync::*;
 
 
 #[inline(always)]
-pub fn critical<T>(f: FnOnce() -> T) -> T {
+pub fn critical<T, F: FnOnce() -> T>(f: F) -> T {
 	cpsid_i();
 	let r = f();
 	cpsie_i();

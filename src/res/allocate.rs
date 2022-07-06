@@ -89,7 +89,7 @@ impl<T: Sized> core::borrow::BorrowMut<T> for Allocation<T> {
 }
 
 impl<T: Sized> core::convert::AsMut<T> for Allocation<T> {
-    fn as_ref(&mut self) -> &mut T {
+    fn as_mut(&mut self) -> &mut T {
         &mut self.inner
     }
 }
