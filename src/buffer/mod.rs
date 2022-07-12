@@ -3,7 +3,7 @@
 
 
 #[repr(C)]
-pub struct Buffer<T> {
+pub struct Buffer<T: 'static> {
     /// Wrapped buffer.
     buffer: &'static mut [T],
 
@@ -14,10 +14,10 @@ pub struct Buffer<T> {
     pub actual: usize,
 }
 
-impl<T> Buffer<T> {
+impl<T: 'static> Buffer<T> {
     /// Creates a new `RXBuffer`.
     pub fn new(buffer: &'static mut [T]) -> Self {
-        Self { buffer, expected: 0, received: 0, }
+        Self { buffer, expected: 0, actual: 0, }
     }
 
     /// Resets the actual and expected counts.
@@ -45,7 +45,7 @@ impl<T> Buffer<T> {
 
 /// TX Buffer Writer. Writes the data that will be sent and updates the expected count.
 #[repr(C)]
-pub struct BufferWriter<T> {
+pub struct BufferWriter<T: 'static> {
     /// Wrapped buffer.
     buffer: &'static mut [T],
 
@@ -56,7 +56,7 @@ pub struct BufferWriter<T> {
     pub actual: usize,
 }
 
-impl<T> core::ops::Index<usize> for BufferWriter<T> {
+impl<T: 'static> core::ops::Index<usize> for BufferWriter<T> {
     type Output = T;
 
     fn index(&self, index: usize) -> &Self::Output {
@@ -64,7 +64,7 @@ impl<T> core::ops::Index<usize> for BufferWriter<T> {
     }
 }
 
-impl<T> core::ops::IndexMut<usize> for BufferWriter<T> {
+impl<T: 'static> core::ops::IndexMut<usize> for BufferWriter<T> {
     fn index_mut(&self, index: usize) -> &mut Self::Output {
         &mut self.buffer[index]
     }
