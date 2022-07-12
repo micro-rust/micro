@@ -59,13 +59,13 @@ pub struct BufferWriter<T> {
 impl<T> core::ops::Index<usize> for BufferWriter<T> {
     type Output = T;
 
-    fn index(&self) -> &Self::Output {
+    fn index(&self, index: usize) -> &Self::Output {
         &self.buffer[index]
     }
 }
 
 impl<T> core::ops::IndexMut<usize> for BufferWriter<T> {
-    fn index_mut(&self) -> &mut Self::Output {
+    fn index_mut(&self, index: usize) -> &mut Self::Output {
         &mut self.buffer[index]
     }
 }
