@@ -20,9 +20,9 @@ macro_rules! preallocate {
         fn resolve() -> &'static mut [u8; $n] {
             #[link_section = ".bss.PREALLOCATE"]
             #[used]
-            pub static mut PREALLOCATION: [u8; $n] = unsafe { ::core::mem::MaybeUninit::<$n>::uninit_array() };
+            pub static mut PREALLOCATION: MaybeUninit<[u8; $n]> = unsafe { ::core::mem::MaybeUninit::uninit() };
 
-            unsafe { &mut PREALLOCATION }
+            unsafe { &mut PREALLOCATION.assume_init_mut() }
         }
 
         resolve()
