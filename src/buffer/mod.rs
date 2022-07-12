@@ -56,7 +56,7 @@ pub struct BufferWriter<T> {
     pub actual: usize,
 }
 
-impl<T> core::ops::Index<usize> for TXBufferWriter<T> {
+impl<T> core::ops::Index<usize> for BufferWriter<T> {
     type Output = T;
 
     fn index(&self) -> &Self::Output {
@@ -64,7 +64,7 @@ impl<T> core::ops::Index<usize> for TXBufferWriter<T> {
     }
 }
 
-impl<T> core::ops::IndexMut<usize> for TXBufferWriter<T> {
+impl<T> core::ops::IndexMut<usize> for BufferWriter<T> {
     fn index_mut(&self) -> &mut Self::Output {
         &mut self.buffer[index]
     }
