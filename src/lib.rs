@@ -11,7 +11,7 @@
 
 
 /// Buffer utilities.
-//pub mod buffer;
+pub mod buffer;
 
 /// Interrupt utilities.
 pub mod int;
