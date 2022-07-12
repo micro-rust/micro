@@ -15,6 +15,18 @@ macro_rules! preallocate {
 
         resolve()
     }};
+
+    (bytes $n:expr) => {{
+        fn resolve<'a>() -> &'static mut [u8; $n] {
+            #[link_section = ".bss.PREALLOCATE"]
+            #[used]
+            pub static mut PREALLOCATION: [u8; $n] = unsafe { ::core::mem::MaybeUninit::uninit().assume_init() };
+
+            unsafe { &mut PREALLOCATION }
+        }
+
+        resolve()
+    }};
 }
 
 #[macro_export]
@@ -27,11 +39,11 @@ macro_rules! reserve {
 /// Preallocation of a struct.
 #[repr(C)]
 pub struct PreAllocation<T: Sized> {
-    /// Wrapped value.
-    inner: T,
-
     /// Has it been initialized already?.
     init: u32,
+
+    /// Wrapped value.
+    inner: T,
 }
 
 impl<T: Sized> PreAllocation<T> {
