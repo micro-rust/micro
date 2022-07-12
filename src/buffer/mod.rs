@@ -65,7 +65,7 @@ impl<T: 'static> core::ops::Index<usize> for BufferWriter<T> {
 }
 
 impl<T: 'static> core::ops::IndexMut<usize> for BufferWriter<T> {
-    fn index_mut(&self, index: usize) -> &mut Self::Output {
+    fn index_mut(&mut self, index: usize) -> &mut Self::Output {
         &mut self.buffer[index]
     }
 }
