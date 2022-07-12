@@ -22,7 +22,7 @@ macro_rules! preallocate {
             #[used]
             pub static mut PREALLOCATION: ::core::mem::MaybeUninit<[u8; $n]> = unsafe { ::core::mem::MaybeUninit::uninit() };
 
-            unsafe { &mut PREALLOCATION.assume_init_mut() }
+            unsafe { PREALLOCATION.assume_init_mut() }
         }
 
         resolve()
