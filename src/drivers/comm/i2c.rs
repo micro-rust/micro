@@ -12,7 +12,7 @@ pub trait I2CDriver: CommunicationError {
     fn send(&mut self, buffer: &[u8], stop: bool) -> Result<(), Self::Error>;
 
     /// Sends a byte buffer then receives bytes until a buffer is full.
-    fn transfer(&mut self, send: &[u8], receive: &mut [u8]) -> Result<(), Self::Error>;
+    fn transfer(&mut self, send: &[u8], receive: &mut [u8], restart: bool, stop: bool) -> Result<(), Self::Error>;
 }
 
 
