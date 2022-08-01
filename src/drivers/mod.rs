@@ -11,7 +11,7 @@ pub mod comm;
 
 //pub mod usb;
 
-
+/*
 
 /// Common trait for data types that can be operated on.
 pub trait Data: Copy + Sized {
@@ -87,3 +87,5 @@ impl Handle {
         self.0 |= Self::ERROR
     }
 }
+
+*/
