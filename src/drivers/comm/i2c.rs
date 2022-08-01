@@ -19,9 +19,12 @@ pub trait I2CDriver: CommunicationError {
 
 /// Asynchronous I2C communication driver.
 pub trait I2CAsyncDriver: CommunicationError {
+    type WriteFuture<'a>: core::future::Future<Output = Result<(), Self::Error>> where Self: 'a;
+    type WriteReadFuture<'a>: core::future::Future<Output = Result<(), Self::Error>> where Self: 'a;
+
     /// Sends a buffer through the I2C bus.
-    async fn send(&mut self, data: &[u8], stop: bool) -> Result<(), Self::Error>;
+    fn send<'a>(&mut self, data: &[u8], stop: bool) -> Self::WriteFuture<'a>;
 
     /// Sends a byte buffer then receives bytes until a buffer is full.
-    async fn transfer(&mut self, send: &[u8], recv: &mut [u8]) -> Result<(), Self::Error>;
+    fn transfer<'a>(&mut self, send: &[u8], recv: &mut [u8]) -> Self::WriteReadFuture<'a>;
 }
