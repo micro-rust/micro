@@ -26,5 +26,5 @@ pub trait I2CAsyncDriver: CommunicationError {
     fn send<'a>(&mut self, data: &[u8], stop: bool) -> Self::WriteFuture<'a>;
 
     /// Sends a byte buffer then receives bytes until a buffer is full.
-    fn transfer<'a>(&mut self, send: &[u8], recv: &mut [u8]) -> Self::WriteReadFuture<'a>;
+    fn transfer<'a>(&mut self, send: &[u8], recv: &mut [u8], restart: bool, stop: bool) -> Self::WriteReadFuture<'a>;
 }
