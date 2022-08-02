@@ -27,6 +27,54 @@ macro_rules! preallocate {
 
         resolve()
     }};
+
+    (half $n:expr) => {{
+        fn resolve() -> &'static mut [u16; $n] {
+            #[link_section = ".bss.PREALLOCATE"]
+            #[used]
+            pub static mut PREALLOCATION: ::core::mem::MaybeUninit<[u16; $n]> = unsafe { ::core::mem::MaybeUninit::uninit() };
+
+            unsafe { PREALLOCATION.assume_init_mut() }
+        }
+
+        resolve()
+    }};
+
+    (word $n:expr) => {{
+        fn resolve() -> &'static mut [u32; $n] {
+            #[link_section = ".bss.PREALLOCATE"]
+            #[used]
+            pub static mut PREALLOCATION: ::core::mem::MaybeUninit<[u32; $n]> = unsafe { ::core::mem::MaybeUninit::uninit() };
+
+            unsafe { PREALLOCATION.assume_init_mut() }
+        }
+
+        resolve()
+    }};
+
+    (u32 $n:expr) => {{
+        fn resolve() -> &'static mut [u32; $n] {
+            #[link_section = ".bss.PREALLOCATE"]
+            #[used]
+            pub static mut PREALLOCATION: ::core::mem::MaybeUninit<[u32; $n]> = unsafe { ::core::mem::MaybeUninit::uninit() };
+
+            unsafe { PREALLOCATION.assume_init_mut() }
+        }
+
+        resolve()
+    }};
+
+    (double $n:expr) => {{
+        fn resolve() -> &'static mut [u64; $n] {
+            #[link_section = ".bss.PREALLOCATE"]
+            #[used]
+            pub static mut PREALLOCATION: ::core::mem::MaybeUninit<[u64; $n]> = unsafe { ::core::mem::MaybeUninit::uninit() };
+
+            unsafe { PREALLOCATION.assume_init_mut() }
+        }
+
+        resolve()
+    }};
 }
 
 #[macro_export]
